@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import { connectdb } from "./config/db.js";
 import userRouter from "./routes/userRoutes.js";
 import incomeRouter from "./routes/incomeRoutes.js";
-
+import expenseRouter from "./routes/expenseRoutes.js";
 // Load environment variables
 dotenv.config();
 
@@ -24,6 +24,7 @@ connectdb();
 // Routes
 app.use("/api/user", userRouter);
 app.use("/api/income", incomeRouter);
+app.use("/api/expense", expenseRouter);
 
 app.get("/", (req, res) => {
   res.send("API Working");
