@@ -1,0 +1,819 @@
+﻿/* ==========================================
+   GOOGLE FONTS
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================
+   CSS VARIABLES - WHITE/BLUE GLASSMORPHISM
+========================================== */
+
+:root {
+  --blue-1: #1d4ed8;
+  --blue-2: #2563eb;
+  --blue-3: #3b82f6;
+  --blue-4: #60a5fa;
+  --blue-5: #bfdbfe;
+  --blue-6: #eff6ff;
+  --white:  #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-shadow: 0 8px 32px rgba(37, 99, 235, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+  --card-shadow: 0 20px 60px rgba(37, 99, 235, 0.13), 0 4px 16px rgba(0,0,0,0.07);
+  --text-dark:  #0f172a;
+  --text-mid:   #334155;
+  --text-muted: #64748b;
+  --border:     rgba(147, 197, 253, 0.4);
+  --danger:     #ef4444;
+  --warning:    #f59e0b;
+  --radius-lg:  20px;
+  --radius-md:  14px;
+  --radius-sm:  10px;
+  --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================
+   GLOBAL RESET
+========================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.6;
+
+  /* White + Blue gradient background */
+  background:
+    radial-gradient(ellipse at 15% 10%,  rgba(59, 130, 246, 0.22) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 80%,  rgba(99, 102, 241, 0.16) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%,  rgba(191, 219, 254, 0.30) 0%, transparent 70%),
+    linear-gradient(160deg, #f0f7ff 0%, #ffffff 40%, #eef2ff 100%);
+  background-attachment: fixed;
+
+  padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ==========================================
+   FLOATING BLOBS (background decoration)
+========================================== */
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  width: 420px;
+  height: 420px;
+  background: rgba(59, 130, 246, 0.18);
+  top: -120px;
+  left: -100px;
+  animation: blobFloat 12s ease-in-out infinite alternate;
+}
+
+body::after {
+  width: 360px;
+  height: 360px;
+  background: rgba(99, 102, 241, 0.14);
+  bottom: -100px;
+  right: -80px;
+  animation: blobFloat 14s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.container {
+  width: 100%;
+  max-width: 720px;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+
+  padding: 36px 40px;
+
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(36px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.header-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid var(--border);
+}
+
+.header-div h2 {
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+/* Header button group */
+.header-div > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 28px;
+  margin-bottom: 14px;
+  padding-left: 2px;
+  letter-spacing: -0.2px;
+}
+
+/* ==========================================
+   PREMIUM BUTTON
+========================================== */
+
+#premiumBtn {
+  position: relative;
+  overflow: hidden;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6, #6366f1);
+  background-size: 200% 200%;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  transition: var(--transition);
+  animation: btnGradient 5s ease infinite;
+  white-space: nowrap;
+}
+
+#premiumBtn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-20deg);
+  animation: btnShine 3s infinite;
+}
+
+@keyframes btnShine {
+  0%   { left: -100%; }
+  50%  { left: 150%;  }
+  100% { left: 150%;  }
+}
+
+@keyframes btnGradient {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+#premiumBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+}
+
+#premiumBtn:active { transform: translateY(0); }
+
+/* ==========================================
+   COD BUTTON
+========================================== */
+
+#codBtn {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #92400e;
+  border: 1.5px solid rgba(245, 158, 11, 0.4);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: rgba(255, 251, 235, 0.85);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+#codBtn:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+}
+
+/* ==========================================
+   PREMIUM MESSAGE
+========================================== */
+
+.premium-success {
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: rgba(239, 246, 255, 0.9);
+  border: 1.5px solid rgba(147, 197, 253, 0.5);
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(10px);
+}
+
+.premium-success h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue-2);
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+#expenseForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  letter-spacing: 0.2px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-dark);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+  appearance: none;
+}
+
+input:hover,
+select:hover {
+  border-color: rgba(96, 165, 250, 0.6);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--blue-3);
+  background: white;
+  box-shadow: 0 0 0 3.5px rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+input::placeholder { color: #94a3b8; }
+
+/* ==========================================
+   SUBMIT BUTTON
+========================================== */
+
+.btn-submit {
+  width: 100%;
+  padding: 13px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+  transition: var(--transition);
+  letter-spacing: 0.2px;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.4);
+}
+
+.btn-submit:active { transform: translateY(0); }
+
+/* ==========================================
+   LEADERBOARD & DOWNLOAD BUTTONS (inside form)
+========================================== */
+
+#expenseForm > div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#leaderboardBtn,
+#downloadBtn {
+  flex: 1;
+  min-width: 130px;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#leaderboardBtn {
+  border: 1.5px solid rgba(245, 158, 11, 0.4);
+  background: rgba(255, 251, 235, 0.85);
+  color: #92400e;
+  backdrop-filter: blur(10px);
+}
+
+#leaderboardBtn:hover {
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+}
+
+#downloadBtn {
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+  background: rgba(239, 246, 255, 0.85);
+  color: #1d4ed8;
+  backdrop-filter: blur(10px);
+}
+
+#downloadBtn:hover {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* ==========================================
+   EXPENSE LIST
+========================================== */
+
+#expenseList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+#expenseList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  background: rgba(255, 255, 255, 0.75);
+  border: 1.5px solid rgba(191, 219, 254, 0.45);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+
+  backdrop-filter: blur(12px);
+  transition: var(--transition);
+  animation: fadeIn 0.35s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#expenseList li:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.1);
+  transform: translateX(4px);
+}
+
+/* expense text portion */
+#expenseList li > :first-child {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
+  min-width: 0;
+  word-break: break-word;
+}
+
+/* button group inside each expense item */
+#expenseList li > :not(:first-child) {
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   EDIT / DELETE BUTTONS
+========================================== */
+
+.btn-edit,
+.btn-delete {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-edit {
+  background: rgba(255, 251, 235, 0.9);
+  color: #92400e;
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  margin-left: 0;
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+}
+
+.btn-delete {
+  background: rgba(254, 242, 242, 0.9);
+  color: #991b1b;
+  border: 1.5px solid rgba(239, 68, 68, 0.3);
+  margin-left: 6px;
+}
+
+.btn-delete:hover {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
+.pagination-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination-container button {
+  padding: 9px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--blue-2);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+}
+
+.pagination-container button:hover:not(:disabled) {
+  background: var(--blue-2);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.pagination-container button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#pageInfo {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+/* ==========================================
+   LEADERBOARD MODAL BACKDROP
+========================================== */
+
+.leaderboard-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: backdropIn 0.25s ease;
+}
+
+@keyframes backdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ==========================================
+   MODAL CONTENT
+========================================== */
+
+.leaderboard-content {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(255,255,255,0.6) inset;
+
+  padding: 32px 28px 28px;
+
+  animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.88) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+.leaderboard-content h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.leaderboard-content > p {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* ==========================================
+   CLOSE BUTTON
+========================================== */
+
+.close-btn {
+  position: absolute;
+  top: 14px; right: 16px;
+  width: 34px; height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(241, 245, 249, 0.9);
+  color: #64748b;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.close-btn:hover {
+  background: #fee2e2;
+  color: #ef4444;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ==========================================
+   LEADERBOARD ROWS
+========================================== */
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  margin-bottom: 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(239, 246, 255, 0.5);
+  border: 1px solid rgba(191, 219, 254, 0.3);
+  transition: var(--transition);
+}
+
+.leaderboard-row:hover {
+  background: rgba(219, 234, 254, 0.7);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.leaderboard-rank {
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.leaderboard-name {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard-amount {
+  font-weight: 800;
+  color: var(--blue-2);
+  font-size: 14px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.5);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--blue-3); }
+
+/* ==========================================
+   RESPONSIVE — TABLET (max 768px)
+========================================== */
+
+@media (max-width: 768px) {
+  body { padding: 20px 12px; align-items: flex-start; }
+
+  .container {
+    padding: 28px 24px;
+    border-radius: 18px;
+  }
+
+  .header-div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+  }
+
+  .header-div h2 { font-size: 22px; }
+
+  .header-div > div {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE — MOBILE (max 480px)
+========================================== */
+
+@media (max-width: 480px) {
+  body { padding: 12px 8px; }
+
+  .container {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .header-div h2 { font-size: 20px; }
+
+  #premiumBtn, #codBtn {
+    font-size: 12px;
+    padding: 9px 13px;
+  }
+
+  #expenseList li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  #expenseList li > :first-child {
+    font-size: 13px;
+  }
+
+  .btn-edit, .btn-delete {
+    font-size: 11px;
+    padding: 6px 12px;
+    margin-left: 0;
+  }
+
+  .leaderboard-row {
+    grid-template-columns: 38px 1fr auto;
+    gap: 8px;
+    padding: 10px 10px;
+  }
+
+  .leaderboard-name { font-size: 13px; }
+  .leaderboard-amount { font-size: 13px; }
+  .leaderboard-rank { font-size: 18px; }
+
+  .leaderboard-content { padding: 24px 16px 20px; }
+
+  #leaderboardBtn, #downloadBtn {
+    flex: 1 1 100%;
+  }
+
+  .pagination-container button { padding: 8px 16px; }
+}
+
+/* ==========================================
+   LOGOUT BUTTON
+========================================== */
+
+#logoutBtn {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #991b1b;
+  border: 1.5px solid rgba(239, 68, 68, 0.35);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: rgba(254, 242, 242, 0.85);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+#logoutBtn:hover {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+}
